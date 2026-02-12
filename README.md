@@ -15,6 +15,14 @@ A Tor Quadlet build service to be reused as a submodule for other projects. The 
 
 ## Install
 
+### Clone
+
+From the parent project root:
+
+```bash
+git submodule add https://github.com/president-not-sure/tor-quadlet.git tor-quadlet
+```
+
 ### Template
 
 > [!IMPORTANT]
@@ -31,19 +39,25 @@ ln -sf tor-internal@.network "tor-internal@${instance_name}.network"
 
 There is also a possibility of overriding the template using systemd overrides for added flexibility.
 
-### Rootless
+### Quadlet
+
+From the parent project root:
+
+#### Rootless
 
 ```bash
-podman quadlet install --replace tor
+podman quadlet install --replace tor-quadlet/tor
 install -vD -m 0644 -t ~/.config/systemd/user timers/tor-build.timer
+systemctl --user daemon-reload
 systemctl --user enable --now tor-build.timer
 ```
 
-### Rootful
+#### Rootful
 
 ```bash
-sudo podman quadlet install --replace tor
+sudo podman quadlet install --replace tor-quadlet/tor
 sudo install -vD -m 0644 -t /etc/systemd/system timers/tor-build.timer
+systemctl --user daemon-reload
 sudo systemctl enable --now tor-build.timer
 ```
 
