@@ -36,7 +36,7 @@ sudo systemctl enable --now tor-build.timer
 ### Rootless
 
 ```bash
-systemctl --user disable --now tor-build.timer 2>/dev/null || :
+systemctl --user disable --now tor-build.timer
 rm -rfv "${HOME}/.config/systemd/user/tor-build.timer"
 podman quadlet rm --force .tor.app
 ```
@@ -44,7 +44,7 @@ podman quadlet rm --force .tor.app
 ### Rootful
 
 ```bash
-sudo systemctl disable --now tor-build.timer 2>/dev/null || :
+sudo systemctl disable --now tor-build.timer
 sudo rm -rfv /etc/systemd/system/tor-build.timer
 sudo podman quadlet rm --force .tor.app
 ```
