@@ -1,0 +1,8 @@
+[Unit]
+Description=tor build service
+After=local-fs.target network-online.target
+
+[Build]
+ImageTag=localhost/tor:latest
+File=%E/containers/systemd/tor.Containerfile
+SetWorkingDirectory=file
