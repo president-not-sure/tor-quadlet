@@ -1,6 +1,6 @@
 # Tor Quadlet
 
-A Tor Quadlet build service to be reused as a submodule for other projects.
+A Tor Quadlet build service to be reused as a submodule for other projects. The resulting image is tagged `localhost/tor:latest`.
 
 ## Requirements
 
@@ -48,8 +48,3 @@ sudo systemctl disable --now tor-build.timer 2>/dev/null || :
 sudo rm -rfv /etc/systemd/system/tor-build.timer
 sudo podman quadlet rm --force .tor.app
 ```
-
-## Note
-
-- The first run will take more time because it needs to build the first image. `journalctl -f -u xmrig-build.service` to see build progress.
-- The resulting image is `localhost/tor:latest`.
