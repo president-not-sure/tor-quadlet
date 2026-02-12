@@ -43,40 +43,40 @@ There is also a possibility of overriding the template using systemd overrides f
 
 From the parent project root:
 
-#### Rootless
+- Rootless
 
-```bash
-podman quadlet install --replace tor-quadlet/tor
-install -vD -m 0644 -t ~/.config/systemd/user timers/tor-build.timer
-systemctl --user daemon-reload
-systemctl --user enable --now tor-build.timer
-```
+    ```bash
+    podman quadlet install --replace tor-quadlet/tor
+    install -vD -m 0644 -t ~/.config/systemd/user timers/tor-build.timer
+    systemctl --user daemon-reload
+    systemctl --user enable --now tor-build.timer
+    ```
 
-#### Rootful
+- Rootful
 
-```bash
-sudo podman quadlet install --replace tor-quadlet/tor
-sudo install -vD -m 0644 -t /etc/systemd/system timers/tor-build.timer
-systemctl --user daemon-reload
-sudo systemctl enable --now tor-build.timer
-```
+    ```bash
+    sudo podman quadlet install --replace tor-quadlet/tor
+    sudo install -vD -m 0644 -t /etc/systemd/system timers/tor-build.timer
+    systemctl --user daemon-reload
+    sudo systemctl enable --now tor-build.timer
+    ```
 
 ## Uninstall
 
-### Rootless
+- Rootless
 
-```bash
-systemctl --user disable --now tor-build.timer
-rm -rfv ~/.config/systemd/user/tor-build.timer
-systemctl --user daemon-reload
-podman quadlet rm --force .tor.app
-```
+    ```bash
+    systemctl --user disable --now tor-build.timer
+    rm -rfv ~/.config/systemd/user/tor-build.timer
+    systemctl --user daemon-reload
+    podman quadlet rm --force .tor.app
+    ```
 
-### Rootful
+- Rootful
 
-```bash
-sudo systemctl disable --now tor-build.timer
-sudo rm -rfv /etc/systemd/system/tor-build.timer
-sudo systemctl daemon-reload
-sudo podman quadlet rm --force .tor.app
-```
+    ```bash
+    sudo systemctl disable --now tor-build.timer
+    sudo rm -rfv /etc/systemd/system/tor-build.timer
+    sudo systemctl daemon-reload
+    sudo podman quadlet rm --force .tor.app
+    ```
