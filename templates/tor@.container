@@ -12,7 +12,9 @@ AddHost=%i-tor:10.1.1.10
 AddHost=%i:10.1.1.20
 Network=tor-internal@%i.network:ip=10.1.1.10
 Network=tor-external@%i.network
-PodmanArgs=--cpus=1 --memory=512m --memory-swap=512m
+DropCapability=all
+NoNewPrivileges=true
+PodmanArgs=--cpus=1 --memory=256m --memory-swap=256m
 HealthCmd=curl -sSLx socks5h://10.1.1.10:9050 'https://check.torproject.org/api/ip' | grep -qE '"IsTor"\s*:\s*true'
 HealthTimeout=5s
 HealthInterval=1m
