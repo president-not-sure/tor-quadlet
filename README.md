@@ -63,5 +63,6 @@ podman quadlet rm --force .tor.app
 ```bash
 sudo systemctl disable --now tor-build.timer
 sudo rm -rfv /etc/systemd/system/tor-build.timer
+sudo systemctl daemon-reload
 sudo podman quadlet rm --force .tor.app
 ```
