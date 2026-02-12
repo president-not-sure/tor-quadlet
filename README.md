@@ -9,7 +9,7 @@ A Tor Quadlet build service to be reused as a submodule for other projects. The 
 
 ## Features
 
-- Automatically rebuilds from upstream source daily
+- Automatically rebuilds from upstream daily
 - No updates required unless upstream introduces breaking changes
 - Minimal image size of ~160MB
 
@@ -35,7 +35,7 @@ There is also a possibility of overriding the template using systemd overrides f
 
 ```bash
 podman quadlet install --replace tor
-install -vD -m 0644 -t "${HOME}/.config/systemd/user" timers/tor-build.timer
+install -vD -m 0644 -t ~/.config/systemd/user timers/tor-build.timer
 systemctl --user enable --now tor-build.timer
 ```
 
@@ -53,7 +53,8 @@ sudo systemctl enable --now tor-build.timer
 
 ```bash
 systemctl --user disable --now tor-build.timer
-rm -rfv "${HOME}/.config/systemd/user/tor-build.timer"
+rm -rfv ~/.config/systemd/user/tor-build.timer
+systemctl --user daemon-reload
 podman quadlet rm --force .tor.app
 ```
 
