@@ -15,6 +15,18 @@ A Tor Quadlet build service to be reused as a submodule for other projects. The 
 
 ## Install
 
+### Template
+
+In your parent project quadlet, symlink to the templates. The instance-name needs to be modified to something unique like your parent project name.
+
+```bash
+ln -sf tor@.container tor@instance-name.container
+ln -sf tor-external@.network tor-external@instance-name.network
+ln -sf tor-internal@.network tor-internal@instance-name.network
+```
+
+There is also a possibility of overriding the template using systemd overrides for added flexibility.
+
 ### Rootless
 
 ```bash

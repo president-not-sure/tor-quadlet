@@ -1,0 +1,28 @@
+[Unit]
+Description=%i-%p container
+After=local-fs.target network-online.target
+PartOf=%i.container
+
+[Container]
+ContainerName=%i-%p
+Image=%p.build
+AutoUpdate=local
+HostName=%i-%p
+AddHost=%i-tor:10.1.1.10
+AddHost=%i:10.1.1.20
+Network=tor-internal@%i.network:ip=10.1.1.10
+Network=tor-external@%i.network
+PodmanArgs=--cpus=1 --memory=512m --memory-swap=512m
+HealthCmd=curl -sSLx socks5h://10.1.1.10:9050 'https://check.torproject.org/api/ip' | grep -qE '"IsTor"\s*:\s*true'
+HealthTimeout=5s
+HealthInterval=1m
+HealthRetries=5
+HealthOnFailure=restart
+Exec=--SocksPort 10.1.1.10:9050
+
+[Service]
+RestartSec=1m
+TimeoutStartSec=5m
+
+[Install]
+WantedBy=default.target

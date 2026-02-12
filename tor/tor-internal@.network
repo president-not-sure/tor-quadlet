@@ -1,0 +1,9 @@
+[Unit]
+Description=%i-%p shared network
+
+[Network]
+NetworkName=%i-%p
+Internal=true
+NetworkDeleteOnStop=true
+Subnet=10.1.1.0/24
+IPRange=10.1.1.10-10.1.1.20

@@ -1,0 +1,6 @@
+[Unit]
+Description=%i-%p network
+
+[Network]
+NetworkName=%i-%p
+NetworkDeleteOnStop=true
