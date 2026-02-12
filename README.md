@@ -17,12 +17,16 @@ A Tor Quadlet build service to be reused as a submodule for other projects. The 
 
 ### Template
 
-In your parent project quadlet, symlink to the templates. The instance-name needs to be modified to something unique like your parent project name.
+> [!IMPORTANT]
+> This feature works with systemd but it is not implemented in Quadlets yet. So for now, only use `templates/*` as a reference and safely ignore this section until implemented by the Podman/systemd project.
+
+In your parent project Quadlet, symlink to the templates. The instance_name needs to be modified to something unique like your parent project name.
 
 ```bash
-ln -sf tor@.container tor@instance-name.container
-ln -sf tor-external@.network tor-external@instance-name.network
-ln -sf tor-internal@.network tor-internal@instance-name.network
+instance_name=project-name
+ln -sf tor@.container "tor@${instance_name}.container"
+ln -sf tor-external@.network "tor-external@${instance_name}.network"
+ln -sf tor-internal@.network "tor-internal@${instance_name}.network"
 ```
 
 There is also a possibility of overriding the template using systemd overrides for added flexibility.
