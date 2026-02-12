@@ -7,20 +7,27 @@ PartOf=%i.container
 ContainerName=%i-%p
 Image=%p.build
 AutoUpdate=local
+# Container CMD
+Exec=--SocksPort %i-tor:9050
+
+# Resources
+DropCapability=all
+NoNewPrivileges=true
+PodmanArgs=--cpus=1 --cpu-shares=1 --memory=256m --memory-swap=256m
+
+# Network
 HostName=%i-%p
 AddHost=%i-tor:10.1.1.10
 AddHost=%i:10.1.1.20
 Network=tor-internal@%i.network:ip=10.1.1.10
 Network=tor-external@%i.network
-DropCapability=all
-NoNewPrivileges=true
-PodmanArgs=--cpus=1 --memory=256m --memory-swap=256m
-HealthCmd=curl -sSLx socks5h://%i-tor:9050 'https://check.torproject.org/api/ip' | grep -qE '"IsTor"\s*:\s*true'
+
+# Healthcheck
+HealthCmd=curl -sSLx socks5h://xmrig-tor:9050 'https://check.torproject.org/api/ip' | grep -qE '"IsTor"\s*:\s*true'
 HealthTimeout=5s
 HealthInterval=1m
 HealthRetries=5
 HealthOnFailure=restart
-Exec=--SocksPort %i-tor:9050
 
 [Service]
 RestartSec=1m
